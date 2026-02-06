@@ -47,27 +47,33 @@ body {
     flex: 1;
     padding: 20px;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
 }
 
 .message {
     margin-bottom: 15px;
     max-width: 75%;
-    padding: 12px 16px;
-    border-radius: 15px;
+    padding: 14px 18px;
+    border-radius: 16px;
     animation: fadeIn 0.3s ease-in-out;
     white-space: pre-wrap;
+    line-height: 1.5;
+    font-size: 15px;
 }
 
-.user {
+.message.user {
     background: #2563eb;
     color: white;
     align-self: flex-end;
     margin-left: auto;
+    box-shadow: 0 0 10px rgba(37,99,235,0.4);
 }
 
-.bot {
-    background: rgba(255,255,255,0.1);
+.message.bot {
+    background: rgba(255,255,255,0.08);
     color: white;
+    border: 1px solid rgba(255,255,255,0.1);
 }
 
 .input-area {
@@ -84,6 +90,11 @@ body {
     outline: none;
     background: rgba(255,255,255,0.1);
     color: white;
+    font-size: 14px;
+}
+
+.input-area input:disabled {
+    opacity: 0.6;
 }
 
 .input-area button {
@@ -94,14 +105,55 @@ body {
     background: #22c55e;
     color: white;
     cursor: pointer;
-    transition: 0.2s;
+    transition: 0.2s ease;
 }
 
 .input-area button:hover {
     background: #16a34a;
 }
 
+.input-area button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* Typing dots */
+
+.dot {
+    height: 6px;
+    width: 6px;
+    margin: 0 3px;
+    background: white;
+    border-radius: 50%;
+    display: inline-block;
+    animation: blink 1.4s infinite both;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.2s;
+}
+.dot:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+@keyframes blink {
+    0% { opacity: 0.2; }
+    20% { opacity: 1; }
+    100% { opacity: 0.2; }
+}
+
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
+}
+
+/* Scrollbar styling */
+
+.chat-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+.chat-container::-webkit-scrollbar-thumb {
+    background: rgba(255,255,255,0.2);
+    border-radius: 10px;
 }
