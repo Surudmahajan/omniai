@@ -5,7 +5,18 @@ const input = document.getElementById("userInput");
 const sendBtn = document.getElementById("sendBtn");
 
 let isProcessing = false;
+// ===== Receive engine context from parent engine page =====
+let engineContextFromParent = null;
 
+window.addEventListener("message", (event) => {
+
+    if (event.data?.type === "ENGINE_CONTEXT") {
+        engineContextFromParent = event.data.payload;
+
+        console.log("OmniAI received engine context:", engineContextFromParent);
+    }
+
+});
 // Enter key support
 input.addEventListener("keypress", function(e) {
     if (e.key === "Enter") {
